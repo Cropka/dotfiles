@@ -1,0 +1,15 @@
+#export WLR_RENDERER=vulkan
+#export WLR_BACKENDS=wayland
+export XDG_CURRENT_DESKTOP=sway
+export MOZ_ENABLE_WAYLAND=1
+export _JAVA_AWT_WM_NONREPARENTING=1
+
+##Settings for Japanese input
+#export GTK_IM_MODULE='ibus'
+#export QT_IM_MODULE='ibus'
+#export XMODIFIERS=@im='ibus'
+
+##Toolbar for anthy
+#ibus-daemon -drx
+
+exec /usr/bin/sway
