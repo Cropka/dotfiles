@@ -19,6 +19,7 @@ Plug('nvim-telescope/telescope.nvim', { branch = '0.1.x' })
 Plug('phaazon/hop.nvim')
 Plug('nvim-tree/nvim-web-devicons') -- optional, for file icons
 Plug('nvim-tree/nvim-tree.lua') -- Project tree
+Plug('nvim-tree/nvim-web-devicons') -- devicons for project tree and telescope
 Plug('mfussenegger/nvim-dap') -- debugger
 Plug('EdenEast/nightfox.nvim')  -- Color scheme
 vim.call('plug#end')
@@ -26,85 +27,14 @@ vim.call('plug#end')
 ----------- Use clipboard ---------------------
 vim.opt.clipboard = vim.opt.clipboard + 'unnamedplus'
 
------------ completion engine (nvim-cmp) ------
-local cmp = require'cmp'
+----------- Show line numbers -----------------
+vim.opt.number = true
 
-cmp.setup({
-  snippet = {
-    -- REQUIRED - you must specify a snippet engine
-    expand = function(args)
-      require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
-    end,
-  },
-  window = {
-    -- completion = cmp.config.window.bordered(),
-    -- documentation = cmp.config.window.bordered(),
-  },
-  mapping = cmp.mapping.preset.insert({
-    ['<C-b>'] = cmp.mapping.scroll_docs(-4),
-    ['<C-f>'] = cmp.mapping.scroll_docs(4),
-    ['<C-Space>'] = cmp.mapping.complete(),
-    ['<C-e>'] = cmp.mapping.abort(),
-    ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
-  }),
-  sources = cmp.config.sources({
-    { name = 'nvim_lsp' },
-    { name = 'luasnip' }, -- For luasnip users.
-  }, {
-    { name = 'buffer' },
-  })
-})
+----------- LSP -------------------------------
+local my_lsp = require'my_lsp_cfg'
 
-  -- Set configuration for specific filetype.
-cmp.setup.filetype('gitcommit', {
-  sources = cmp.config.sources({
-    { name = 'cmp_git' }, -- You can specify the `cmp_git` source if you were installed it.
-  }, {
-    { name = 'buffer' },
-  })
-})
-
-  -- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
-cmp.setup.cmdline({ '/', '?' }, {
-  mapping = cmp.mapping.preset.cmdline(),
-  sources = {
-    { name = 'buffer' }
-  }
-})
-
-  -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
-cmp.setup.cmdline(':', {
-  mapping = cmp.mapping.preset.cmdline(),
-  sources = cmp.config.sources({
-    { name = 'path' }
-  }, {
-    { name = 'cmdline' }
-  })
-})
-
-  -- Set up lspconfig.
-local capabilities = require('cmp_nvim_lsp').default_capabilities()
-require('lspconfig')['clangd'].setup {
-  capabilities = capabilities
-}
-require('lspconfig')['lua_ls'].setup {
-  capabilities = capabilities
-}
-
--- Rust lspconfig is done by rust-tools plugin!
-local rt = require("rust-tools")
-
-rt.setup({
-  server = {
-    on_attach = function(_, bufnr)
-      -- Hover actions
-      vim.keymap.set("n", "<C-space>", rt.hover_actions.hover_actions, { buffer = bufnr })
-      -- Code action groups
-      vim.keymap.set("n", "<Leader>a", rt.code_action_group.code_action_group, { buffer = bufnr })
-    end,
-  },
-})
-
+----------- Completion engine -----------------
+local my_cmp = require'my_cmp_cfg'
 
 ----------- nvim treesitter -------------------
 require'nvim-treesitter.configs'.setup {
@@ -130,35 +60,12 @@ require'hop'.setup()
 
 
 ----------- Project Tree ----------------------
--- disable netrw at the very start of your init.lua (strongly advised)
-vim.g.loaded_netrw = 1
-vim.g.loaded_netrwPlugin = 1
-
--- set termguicolors to enable highlight groups
-vim.opt.termguicolors = true
-
--- empty setup using defaults
-require("nvim-tree").setup()
-
--- OR setup with some options
-require("nvim-tree").setup({
-  sort_by = "case_sensitive",
-  view = {
-    width = 30,
-    mappings = {
-      list = {
-        { key = "u", action = "dir_up" },
-      },
-    },
-  },
-  renderer = {
-    group_empty = true,
-  },
-  filters = {
-    dotfiles = true,
-  },
-})
-
+local my_cmp = require'project_tree'
 
 ----------- Set Color Scheme ------------------
 vim.cmd('colorscheme duskfox')
+
+
+
+-- qt project re,ove later
+vim.opt.makeprg = 'cd build && cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=1 ..'
