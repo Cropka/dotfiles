@@ -30,6 +30,10 @@ vim.opt.clipboard = vim.opt.clipboard + 'unnamedplus'
 ----------- Show line numbers -----------------
 vim.opt.number = true
 
+----------- Tab / Spaces ----------------------
+vim.opt.softtabstop = 4
+vim.opt.shiftwidth = 4
+
 ----------- LSP -------------------------------
 local my_lsp = require'my_lsp_cfg'
 
@@ -67,5 +71,42 @@ vim.cmd('colorscheme duskfox')
 
 
 
--- qt project re,ove later
-vim.opt.makeprg = 'cd build && cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=1 ..'
+-- make command per filetype ------------------
+vim.api.nvim_create_autocmd("FileType", { pattern = 'cpp', 
+    callback = function ()
+	vim.opt.makeprg = 'cd build && cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=1 ..'
+    end
+})
+
+vim.api.nvim_create_autocmd("FileType", { pattern = 'rust', 
+    callback = function ()
+	vim.opt.makeprg = 'cargo build'
+    end
+})
+
+------------------ Terminal -------------------
+vim.g.term_buf = 0
+vim.g.term_win = 0
+function TermToggle()
+    if vim.g.term_win == 0 then
+	vim.cmd('botright sp')
+	vim.g.term_win = vim.api.nvim_get_current_win()
+    	if vim.g.term_buf == 0 or not vim.api.nvim_buf_is_valid(vim.g.term_buf) then
+	    vim.cmd('terminal')
+	    vim.g.term_buf = vim.api.nvim_win_get_buf(vim.g.term_win)
+	else 
+	    vim.api.nvim_win_set_buf(vim.g.term_win, vim.g.term_buf)
+	end
+    else
+	if vim.api.nvim_win_is_valid(vim.g.term_win) then
+	    vim.api.nvim_win_hide(vim.g.term_win)
+	    vim.g.term_win = 0
+	else
+	    vim.g.term_win = 0
+	    TermToggle()
+	end
+    end
+end
+
+vim.keymap.set('n', '<leader>tt', TermToggle, {})
+

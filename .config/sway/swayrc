@@ -3,13 +3,12 @@
 export XDG_CURRENT_DESKTOP=sway
 export MOZ_ENABLE_WAYLAND=1
 export _JAVA_AWT_WM_NONREPARENTING=1
+export GDK_BACKEND=wayland
+export CLUTTER_BACKEND=wayland
 
-##Settings for Japanese input
-#export GTK_IM_MODULE='ibus'
-#export QT_IM_MODULE='ibus'
-#export XMODIFIERS=@im='ibus'
-
-##Toolbar for anthy
-#ibus-daemon -drx
+#Settings for Japanese input
+export GTK_IM_MODULE=fcitx
+export QT_IM_MODULE=fcitx
+export XMODIFIERS=@im=fcitx
 
 exec /usr/bin/sway
