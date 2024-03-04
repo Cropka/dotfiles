@@ -12,7 +12,7 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-lazy_opts = {}
+local lazy_opts = {}
 require("lazy").setup("plugins", lazy_opts)
 
 ----------- Use clipboard ---------------------
@@ -25,10 +25,7 @@ vim.opt.number = true
 vim.opt.softtabstop = 4
 vim.opt.shiftwidth = 4
 
------------ LSP -------------------------------
-local my_lsp = require'my_lsp_cfg'
-
------------ Completion engine -----------------
+----------- Completion engine and snippets -----------------
 local my_cmp = require'my_cmp_cfg'
 
 ----------- nvim treesitter -------------------
@@ -42,19 +39,23 @@ require'nvim-treesitter.configs'.setup {
         additional_vim_regex_highlighting = false,
     },
 }
-
+require'Comment'.setup()
 
 ----------- Hop -------------------------------
 require'hop'.setup()
 vim.keymap.set('n', '<leader>hh', '<cmd>HopWord<cr>', {})
 
+----------- Multiline cursor ------------------
+require'multiple-cursors'.setup()
+
+----------- Surround --------------------------
+require("nvim-surround").setup()
+
 ----------- Project Tree ----------------------
-local my_cmp = require'project_managing'
+local my_pm = require'project_managing'
 
 ----------- Set Color Scheme ------------------
 vim.cmd('colorscheme duskfox')
-
-
 
 -- make command per filetype ------------------
 vim.api.nvim_create_autocmd("FileType", { pattern = 'cpp', 
