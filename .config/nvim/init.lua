@@ -15,18 +15,17 @@ vim.opt.rtp:prepend(lazypath)
 local lazy_opts = {}
 require("lazy").setup("plugins", lazy_opts)
 
+------------ general editor settings ---------------------------
+require'general_settings'
+
 ----------- Use clipboard ---------------------
 vim.opt.clipboard = vim.opt.clipboard + 'unnamedplus'
 
------------ Show line numbers -----------------
-vim.opt.number = true
-
------------ Tab / Spaces ----------------------
-vim.opt.softtabstop = 4
-vim.opt.shiftwidth = 4
-
 ----------- Completion engine and snippets -----------------
 local my_cmp = require'my_cmp_cfg'
+
+----------- LSP config -------------------------------------
+local my_lsp = require("my_lsp_cfg")
 
 ----------- nvim treesitter -------------------
 require'nvim-treesitter.configs'.setup {
@@ -96,3 +95,5 @@ end
 
 vim.keymap.set('n', '<leader>tt', TermToggle, {})
 
+----------------- Python provider ---------------
+vim.g.python3_host_prog = "/usr/bin/py4nvim"

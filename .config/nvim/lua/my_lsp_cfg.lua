@@ -40,16 +40,23 @@ local lsp_flags = {
 }
 
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
-require('lspconfig')['clangd'].setup {
+local lspconfig = require("lspconfig")
+lspconfig['clangd'].setup {
   on_attach = on_attach,
   capabilities = capabilities,
   flags = lsp_flags
 }
-require('lspconfig')['lua_ls'].setup {
+lspconfig['lua_ls'].setup {
   on_attach = on_attach,
   capabilities = capabilities,
   flags = lsp_flags
 }
+lspconfig['pylsp'].setup {
+  on_attach = on_attach,
+  capabilities = capabilities,
+  flags = lsp_flags
+}
+
 
 -- Rust lspconfig is done by rust-tools plugin!
 local rt = require("rust-tools")
