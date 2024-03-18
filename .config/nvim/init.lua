@@ -38,6 +38,12 @@ require'nvim-treesitter.configs'.setup {
         additional_vim_regex_highlighting = false,
     },
 }
+vim.api.nvim_create_autocmd({"BufRead", "BufNewFile"}, { pattern = 'Jenkinsfile',
+    command = 'setf groovy'
+})
+
+
+
 require'Comment'.setup()
 
 ----------- Hop -------------------------------
@@ -51,19 +57,19 @@ require'multiple-cursors'.setup()
 require("nvim-surround").setup()
 
 ----------- Project Tree ----------------------
-local my_pm = require'project_managing'
+require'project_managing'
 
 ----------- Set Color Scheme ------------------
 vim.cmd('colorscheme duskfox')
 
 -- make command per filetype ------------------
-vim.api.nvim_create_autocmd("FileType", { pattern = 'cpp', 
+vim.api.nvim_create_autocmd("FileType", { pattern = 'cpp',
     callback = function ()
 	vim.opt.makeprg = 'cd build && cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=1 ..'
     end
 })
 
-vim.api.nvim_create_autocmd("FileType", { pattern = 'rust', 
+vim.api.nvim_create_autocmd("FileType", { pattern = 'rust',
     callback = function ()
 	vim.opt.makeprg = 'cargo build'
     end
@@ -79,7 +85,7 @@ function TermToggle()
     	if vim.g.term_buf == 0 or not vim.api.nvim_buf_is_valid(vim.g.term_buf) then
 	    vim.cmd('terminal')
 	    vim.g.term_buf = vim.api.nvim_win_get_buf(vim.g.term_win)
-	else 
+	else
 	    vim.api.nvim_win_set_buf(vim.g.term_win, vim.g.term_buf)
 	end
     else
