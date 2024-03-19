@@ -1,3 +1,5 @@
+vim.g.mapleader = ' '
+
 ------------ Lazy ----------------------------
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
@@ -46,15 +48,28 @@ vim.api.nvim_create_autocmd({"BufRead", "BufNewFile"}, { pattern = 'Jenkinsfile'
 
 require'Comment'.setup()
 
------------ Hop -------------------------------
 require'hop'.setup()
 vim.keymap.set('n', '<leader>hh', '<cmd>HopWord<cr>', {})
 
------------ Multiline cursor ------------------
 require'multiple-cursors'.setup()
 
------------ Surround --------------------------
 require("nvim-surround").setup()
+
+-- UndoTree
+vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle)
+
+----------- Harpoon --------------------------
+local mark = require("harpoon.mark")
+local ui = require("harpoon.ui")
+
+vim.keymap.set("n", "<leader>a", mark.add_file)
+vim.keymap.set("n", "<C-e>", ui.toggle_quick_menu)
+
+vim.keymap.set("n", "<C-1>", function() ui.nav_file(1) end)
+vim.keymap.set("n", "<C-2>", function() ui.nav_file(2) end)
+vim.keymap.set("n", "<C-3>", function() ui.nav_file(3) end)
+vim.keymap.set("n", "<C-4>", function() ui.nav_file(4) end)
+
 
 ----------- Project Tree ----------------------
 require'project_managing'
@@ -74,6 +89,11 @@ vim.api.nvim_create_autocmd("FileType", { pattern = 'rust',
 	vim.opt.makeprg = 'cargo build'
     end
 })
+
+vim.api.nvim_create_autocmd({"BufNewFile", "BufRead"}, { pattern = 'Jenkinsfile*',
+    command = 'setf groovy',
+})
+
 
 ------------------ Terminal -------------------
 vim.g.term_buf = 0
@@ -103,3 +123,7 @@ vim.keymap.set('n', '<leader>tt', TermToggle, {})
 
 ----------------- Python provider ---------------
 vim.g.python3_host_prog = "/usr/bin/py4nvim"
+
+
+vim.keymap.set("n", "<leader>fml", "<cmd>CellularAutomaton make_it_rain<CR>")
+
