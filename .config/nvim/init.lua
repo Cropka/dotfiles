@@ -124,6 +124,7 @@ vim.keymap.set('n', '<leader>tt', TermToggle, {})
 ----------------- Python provider ---------------
 vim.g.python3_host_prog = "/usr/bin/py4nvim"
 
+vim.opt.statusline = '%{FugitiveStatusline()}'
 
 vim.keymap.set("n", "<leader>fml", "<cmd>CellularAutomaton make_it_rain<CR>")
 
