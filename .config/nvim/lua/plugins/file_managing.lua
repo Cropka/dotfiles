@@ -1,9 +1,9 @@
 return {
     {
-	"nvim-tree/nvim-tree.lua", lazy = false, version = '*',
-	dependencies =  {
-	    "nvim-tree/nvim-web-devicons",
-	},
+	    "nvim-tree/nvim-tree.lua", lazy = true, version = '*',
+	    dependencies =  {
+	        "nvim-tree/nvim-web-devicons",
+	    },
     },
     'nvim-lua/plenary.nvim',
     {"nvim-telescope/telescope.nvim", branch = '0.1.x'},
