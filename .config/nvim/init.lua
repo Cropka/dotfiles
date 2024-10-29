@@ -44,7 +44,10 @@ vim.api.nvim_create_autocmd({"BufRead", "BufNewFile"}, { pattern = 'Jenkinsfile'
     command = 'setf groovy'
 })
 
-
+vim.api.nvim_create_autocmd({ "BufWritePre" }, {
+  pattern = { "*" },
+  command = [[%s/\s\+$//e]],
+})
 
 require'Comment'.setup()
 

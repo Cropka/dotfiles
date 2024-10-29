@@ -54,7 +54,17 @@ lspconfig['lua_ls'].setup {
 lspconfig['pylsp'].setup {
   on_attach = on_attach,
   capabilities = capabilities,
-  flags = lsp_flags
+  flags = lsp_flags,
+  settings = {
+    pylsp = {
+      plugins = {
+        pycodestyle = {
+          ignore = {},
+          maxLineLength = 120
+        }
+      }
+    }
+  }
 }
 
 
