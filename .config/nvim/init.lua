@@ -93,11 +93,6 @@ vim.api.nvim_create_autocmd("FileType", { pattern = 'rust',
     end
 })
 
-vim.api.nvim_create_autocmd({"BufNewFile", "BufRead"}, { pattern = 'Jenkinsfile*',
-    command = 'setf groovy',
-})
-
-
 ------------------ Terminal -------------------
 vim.g.term_buf = 0
 vim.g.term_win = 0

@@ -19,7 +19,7 @@ vim.opt.scrolloff = 8
 vim.opt.signcolumn = 'yes'
 
 vim.opt.updatetime = 50
-vim.opt.colorcolumn = '80'
+vim.opt.colorcolumn = '80,120'
 
 ------------------------- Remaps ---------------------------------
 -- move selection up/down
@@ -34,7 +34,7 @@ vim.keymap.set("n", "<C-u>", "<C-u>zz")
 vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
 
--- paste over selection and retain copy buffer 
+-- paste over selection and retain copy buffer
 vim.keymap.set("x", "<leader>p", [["_dP]])
 
 -- yank/cut into system clipboard with <leader>
@@ -46,12 +46,18 @@ vim.keymap.set({"n", "v"}, "<leader>d", [["_d]])
 vim.keymap.set("n", "Q", "<nop>")
 
 -- quickfix list
-vim.keymap.set("n", "<C-k>", "<cmd>cnext<CR>zz")
-vim.keymap.set("n", "<C-j>", "<cmd>cprev<CR>zz")
-vim.keymap.set("n", "<leader>k", "<cmd>lnext<CR>zz")
-vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz")
+--vim.keymap.set("n", "<C-k>", "<cmd>cnext<CR>zz")
+--vim.keymap.set("n", "<C-j>", "<cmd>cprev<CR>zz")
+--vim.keymap.set("n", "<leader>k", "<cmd>lnext<CR>zz")
+--vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz")
 
--- current word search and replace 
+-- current word search and replace
 vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 -- make file executable
 vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
+
+-- terminal window movement
+vim.keymap.set("t", "<C-w>h", "<cmd>wincmd h<CR>")
+vim.keymap.set("t", "<C-w>j", "<cmd>wincmd j<CR>")
+vim.keymap.set("t", "<C-w>k", "<cmd>wincmd k<CR>")
+vim.keymap.set("t", "<C-w>l", "<cmd>wincmd l<CR>")

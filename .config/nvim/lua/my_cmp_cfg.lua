@@ -16,8 +16,8 @@ cmp.setup({
     end,
   },
   window = {
-    -- completion = cmp.config.window.bordered(),
-    -- documentation = cmp.config.window.bordered(),
+    completion = cmp.config.window.bordered(),
+    documentation = cmp.config.window.bordered(),
   },
   mapping = cmp.mapping.preset.insert({
     ['<C-b>'] = cmp.mapping.scroll_docs(-4),
@@ -28,7 +28,7 @@ cmp.setup({
     ['<Tab>'] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_next_item()
-      -- You could replace the expand_or_jumpable() calls with expand_or_locally_jumpable() 
+      -- You could replace the expand_or_jumpable() calls with expand_or_locally_jumpable()
       -- that way you will only jump inside the snippet region
       elseif ls.expand_or_jumpable() then
        ls.expand_or_jump()
@@ -84,4 +84,7 @@ cmp.setup.cmdline(':', {
   })
 })
 
+ls.config.set_config({ history = true, updateevents = "TextChanged,TextChangedI" })
 require("luasnip.loaders.from_vscode").load()
+require('nvim-autopairs').setup({})
+require("lsp_signature").setup({})

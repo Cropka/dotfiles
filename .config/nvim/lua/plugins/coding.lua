@@ -18,23 +18,24 @@ return {
     'saadparwaiz1/cmp_luasnip',
     'neovim/nvim-lspconfig',
     'numToStr/Comment.nvim',
+    {
+        "ray-x/lsp_signature.nvim",
+        event = "VeryLazy",
+        opts = {},
+        config = function(_, opts) require'lsp_signature'.setup(opts) end
+    },
     -------------------------------------------
     -- LSP additional language client tools --
     'simrat39/rust-tools.nvim', -- Rust tools (lspconfig)
     -------------------------------------------
     ----------------- General -----------------
     {"nvim-treesitter/nvim-treesitter", build = ":TSUpdate"}, -- Better code coloring
-    { -- Mulitple cursors
-         "brenton-leighton/multiple-cursors.nvim",
-         version = "*",  -- Use the latest tagged version
-         opts = {},  -- This causes the plugin setup function to be called
-         keys = {
-             {"<C-j>", "<Cmd>MultipleCursorsAddDown<CR>"},
-             {"<C-k>", "<Cmd>MultipleCursorsAddUp<CR>"},
-             {"<C-LeftMouse>", "<Cmd>MultipleCursorsMouseAddDelete<CR>", mode = {"n", "i"}},
-             {"<Leader>a", "<Cmd>MultipleCursorsAddMatches<CR>", mode = {"n", "x"}},
-             {"<Leader>A", "<Cmd>MultipleCursorsAddMatchesV<CR>", mode = {"n", "x"}},
-         }
+    {
+        'windwp/nvim-autopairs', -- pair parenthesis on enter
+        event = "InsertEnter",
+        config = true
+        -- use opts = {} for passing setup options
+        -- this is equivalent to setup({}) function
     },
 }
 

@@ -12,4 +12,14 @@ return {
     'phaazon/hop.nvim',
     'mbbill/undotree',
     'eandrju/cellular-automaton.nvim',
+    { -- Mulitple cursors
+         "brenton-leighton/multiple-cursors.nvim",
+         version = "*",  -- Use the latest tagged version
+         opts = {},  -- This causes the plugin setup function to be called
+         keys = {
+             {"<C-j>", "<Cmd>MultipleCursorsAddDown<CR>"},
+             {"<C-k>", "<Cmd>MultipleCursorsAddUp<CR>"},
+         }
+    },
+
 }

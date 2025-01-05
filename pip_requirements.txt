@@ -1,0 +1,14 @@
+flake8
+jedi
+mccabe
+pycodestyle
+pydocstyle
+pyflakes
+pylint
+pyparsing
+python-lsp-jsonrpc
+python-lsp-server
+python-lsp-black
+python-lsp-isort
+pylsp-rope
+rope
