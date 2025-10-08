@@ -45,6 +45,7 @@ vim.lsp.config('clangd', {
     capabilities = capabilities,
     flags = lsp_flags
 })
+vim.lsp.enable('clangd')
 
 vim.lsp.config('lua_ls', {
     on_attach = on_attach,
@@ -58,6 +59,7 @@ vim.lsp.config('lua_ls', {
         },
     },
 })
+vim.lsp.enable('lua_ls')
 
 vim.lsp.config('pylsp', {
     on_attach = on_attach,
@@ -89,6 +91,7 @@ vim.lsp.config('pylsp', {
         }
     }
 })
+vim.lsp.enable('pylsp')
 
 
 -- Rust lspconfig is done by rust-tools plugin!
