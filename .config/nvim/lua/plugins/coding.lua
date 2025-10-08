@@ -16,7 +16,6 @@ return {
         dependencies = { "rafamadriz/friendly-snippets" }
     },
     'saadparwaiz1/cmp_luasnip',
-    'neovim/nvim-lspconfig',
     'numToStr/Comment.nvim',
     {
         "ray-x/lsp_signature.nvim",

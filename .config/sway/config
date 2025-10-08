@@ -36,8 +36,8 @@ output * bg $HOME/images/wallpapers/tux-glass.jpg fill
 # Example configuration:
 #
 exec swayidle -w \
-	timeout 300 'swaylock -f -i $HOME/images/wallpapers/tux-joker.png' \
-        timeout 600 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
+	timeout 3000 'swaylock -f -i $HOME/images/wallpapers/tux-joker.png' \
+        timeout 6000 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
 	before-sleep 'swaylock -f -i $HOME/images/wallpapers/tux-joker.png'
 #
 # This will lock your screen after 300 seconds of inactivity, then turn off
@@ -215,7 +215,7 @@ bar {
     # The default just shows the current date and time.
 
     # status_command while date +'%Y-%m-%d %I:%M:%S %p'; do sleep 1; done
-    swaybar_command waybar 
+    swaybar_command waybar
 
     #colors {
     #    statusline #ffffff
